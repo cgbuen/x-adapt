@@ -11,6 +11,9 @@ export default new Router()
       }
     })
   })
+  .get('/images/:path', ({ serveStatic }) => {
+    serveStatic('src/assets/images/:path')
+  })
   .get('/adapt-main.css', ({ serveStatic }) => {
     serveStatic('dist/assets-css.css')
   })

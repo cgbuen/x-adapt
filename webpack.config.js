@@ -13,6 +13,18 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]'
+            },
+          }
+        ]
+      },
+      {
         test: /\.s?css$/,
         use: [
           {
