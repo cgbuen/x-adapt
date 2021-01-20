@@ -1,7 +1,6 @@
 const handler = ({ $, $html, $head, $body } : { $: any, $html: any, $head: any, $body: any }) => {
   console.log('bsdf')
   console.log('## in page transform file')
-  $head.find('style, link').remove()
   const $newEl = $('<div>')
   $newEl.addClass('mw-aaab')
   $newEl.text('aaab')

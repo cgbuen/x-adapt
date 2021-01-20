@@ -11,6 +11,12 @@ export default new Router()
       }
     })
   })
+  .get('/adapt-main.css', ({ serveStatic }) => {
+    serveStatic('dist/assets-css.css')
+  })
+  .get('/adapt-main.js', ({ serveStatic }) => {
+    serveStatic('dist/assets-js.js')
+  })
   .get('/service-worker.js', ({ serviceWorker }) => {
     serviceWorker('dist/service-worker.js')
   })

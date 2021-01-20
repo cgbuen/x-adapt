@@ -1,23 +1,48 @@
 const path = require('path')
 const webpack = require('webpack')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   entry: {
     browser: './src/browser.ts',
     'service-worker': './src/service-worker.ts',
+    'assets-js': './src/assets/javascript/index.js',
+    'assets-css': './src/assets/stylesheets/index.scss'
   },
   mode: 'development',
   module: {
     rules: [
       {
+        test: /\.s?css$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'assets-css.css'
+            },
+          },
+          { loader: 'extract-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' },
+        ]
+      },
+      {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules|assets/,
       },
     ],
   },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        sourceMap: true
+      }),
+    ],
+  },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.png'],
   },
   output: {
     filename: '[name].js',
