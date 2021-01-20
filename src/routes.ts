@@ -32,7 +32,6 @@ export default new Router()
   .fallback(({ proxy }) => {
     proxy('origin', {
       transformResponse: (res, req) => {
-        console.log('@@@@ removing/deleting headers from transformResponse')
         res.removeHeader && res.removeHeader('content-security-policy')
       }
     })
